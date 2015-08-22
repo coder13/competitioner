@@ -1,124 +1,116 @@
 var _ = require('lodash');
 var React = require('react');
+var Card = require('react-material-card');
 var ampersandMixin = require('ampersand-react-mixin');
 var Competitor = require('../models/competitor.js');
 var CompetitorForm = require('../forms/competitor.js');
 
 // Competition page. Wil allow coniguration of the competition.
 module.exports = React.createClass({
-    mixins: [ampersandMixin],
+	mixins: [ampersandMixin],
 
-    displayName: 'Competition',
+	displayName: 'Competition',
 
-    propTypes: {
-        comp: React.PropTypes.object.isRequired,
-    },
+	propTypes: {
+		comp: React.PropTypes.object.isRequired,
+	},
 
-    componentWillRecieveProps () {
-        this.setState({eventText: ''})
-    },
+	componentWillRecieveProps () {
+		this.setState({eventText: ''})
+	},
 
-    getInitialState: function() {
-        console.log(this.props.comp);
-        return {
-            eventText: ''
-        };
-    },
+	getInitialState: function() {
+		console.log(this.props.comp);
+		return {
+			eventText: ''
+		};
+	},
 
-    onNameChange (e) {
-        console.log(this.props);
-        this.props.comp.name = e.target.value;
-        this.forceUpdate();
-        console.log(this.props.comp);
-    },
+	onNameChange (e) {
+		this.props.comp.name = e.target.value;
+		this.forceUpdate();
+	},
 
-    /* events: */
+	/* events: */
 
-    onEventChange (e) {
-        console.log(e.target)
-        this.setState({
-            eventText: e.target.value
-        });
-    },
+	onEventChange (e) {
+		this.setState({
+			eventText: e.target.value
+		});
+	},
 
-    onEventPress (e) {
-        if (e.which === 13) {
-            this.addEvent();
-        }
-    },
+	onEventPress (e) {
+		if (e.which === 13) {
+			this.addEvent();
+		}
+	},
 
-    onAddEvent (e) {
-        this.addEvent();
-        console.log(this.state);
-    },
+	onAddEvent (e) {
+		this.addEvent();
+		console.log(this.state);
+	},
 
-    addEvent (event) {
-        var text = event || this.state.eventText;
-        if (text) {
-            this.props.comp.events.push(text);
-            this.setState({
-                eventText: ''
-            });
-        }
-    },
+	addEvent (event) {
+		var text = event || this.state.eventText;
+		if (text) {
+			this.props.comp.events.push(text);
+			this.setState({
+				eventText: ''
+			});
+		}
+	},
 
-    /* users: */
+	/* users: */
 
-    onAddUser (event) {
-        this.props.comp.addUser();
-        this.forceUpdate();
-    },
+	onAddUser (event) {
+		this.props.comp.addUser();
+		this.forceUpdate();
+	},
 
-    /* render */
+	/* render */
 
-    render () {
-        console.log(this.props);
-        const {name, events} = this.props.comp;
-        const {eventText} = this.state;
-        console.log(name, events, eventText);
-        return (
-            <div>
-                <h1 className='center'>{name}</h1>
-                <form>
-                    <fieldset>
-                        <legend style={{'text-align':'left'}}>Competition Settings</legend>
+	render () {
+		const {name, events} = this.props.comp;
+		const {eventText} = this.state;
+		return (
+			<div>
+				<h1 style={name ? {} : {height: '52px'}}className='center'>{name}</h1>
+				<form>
+					<fieldset>
+						<legend style={{'text-align':'left'}}>Competition Settings</legend> 
 
-                        <div className='form-element'>
-                            <label style={{'text-align': 'left'}} htmlFor='Name'>Name:</label>
-                            <input name='name' className='form-input' type='text' value={name} onChange={this.onNameChange}/>
-                        </div>
+						<div className='form-element'>
+							<label style={{'text-align': 'left'}} htmlFor='Name'>Name:</label>
+							<input name='name' className='form-input' type='text' value={name} onChange={this.onNameChange}/>
+						</div>
 
-                        <fieldset>
-                            <legend style={{'text-align':'left'}}>Events</legend>
+						<fieldset>
+							<legend style={{'text-align':'left'}}>Events</legend>
 
-                            <div>
-                                <ul>
-                                    {events.map((e) => {
-                                        return <li>{e}</li>
-                                    })}
-                                </ul>
-                            </div>
-                            
-                            <div className='form-element'>
-                                <div style={{float: 'left', width: '50%'}} className='form-inline'>
-                                    <input type='text' id='event' placeholder='event' value={eventText} className='form-input' onChange={this.onEventChange} onKeyPress={this.onEventPress}/>
-                                </div>
-                                <div style={{float: 'left', 'padding-left': '5px'}} className='form-inline'>
-                                    <button className='button button-small' type='button' onClick={this.onAddEvent}>Add Event</button>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </fieldset>
-                </form>
+							<div>
+								<ul style={{'margin-bottom': '5px'}}>
+									{events.map((e) => {
+										return <li>{e}</li>
+									})}
+								</ul>
+							</div>
+							
+							<fieldset style={{border: 'none'}}>
+								<input type='text' style={{float: 'left', width: '50%'}} className='form-input form-inline' placeholder='event' value={eventText} onChange={this.onEventChange} onKeyPress={this.onEventPress}/>
+								<button type='button' style={{float: 'left', 'margin-left': '5px', 'padding-left': '5px'}} className='button button-small' onClick={this.onAddEvent}>Add Event</button>
+							</fieldset>
+						</fieldset>
+					</fieldset>
+				</form>
 
-                <fieldset>
-                    <legend style={{'text-align':'left'}}>Users</legend>
-                    {this.props.comp.users.map((user) => <CompetitorForm user={user}/>)}
+				<fieldset style={{padding: '10px'}}>
+					<legend style={{'text-align':'left'}}>Users</legend>
+					{this.props.comp.users.map((user) => <CompetitorForm user={user} events={events}/>)}
 
-                    <button className='button center' type='button' onClick={this.onAddUser}>New User</button>
-                </fieldset>
-            </div>
-        );
-    }
+					<button type='button' style={{'margin-left': '5px'}} className='button center' onClick={this.onAddUser}>New User</button>
+				</fieldset>
+			</div>
+		);
+	}
 });
 

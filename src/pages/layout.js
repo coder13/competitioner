@@ -1,5 +1,6 @@
 var React = require('react');
 var app = require('ampersand-app');
+var Card = require('react-material-card')
 var ampersandMixin = require('ampersand-react-mixin');
 var NavHelper = require('../components/nav-helper.js');
 var Competitors = require('../components/competitors.js')
@@ -33,21 +34,22 @@ module.exports = React.createClass({
 				</nav>
 				<div id='layoutBody' className='grid-flex-container'>
 					<div id='sidebar' className='grid-flex-cell grid-flex-cell-1of4'>
-						<div id='competitions'>
+						<Card style={{'margin-bottom': '5px', padding: '5px'}} id='competitions' level={2}>
 							<h4>Competitions:</h4>
 							<ul className='list-unstyled'>
 								{this.props.competitions.map((comp) => (<li className='comp-li'><a href={'/competition/' + comp.id}>{comp.name}</a></li>))}
 							</ul>
 							<a className='button' href="/export">Export</a>
-						</div>
-						<div id='competitors'>
+						</Card>
+						<Card style={{'margin-bottom': '5px', padding: '5px'}} id='competitors' level={2}>
+							<h4>Competitors:</h4>
 							<Competitors competitions={this.props.competitions}/>
-						</div>
+						</Card>
 					</div>
 
-					<div className='grid-flex-cell container'>
+					<Card level={2} className='grid-flex-cell container'>
 						{this.props.children}
-					</div>
+					</Card>
 				</div>
 
 			</NavHelper>

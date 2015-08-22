@@ -18,11 +18,12 @@ module.exports = Model.extend({
 
 	initialize () {
 		this.events = [];
-
 	},
 
 	addUser () {
 		this.users.push(new Competitor());
+		this.trigger('change');
+		console.log(26, this.users);
 	}
 
 });

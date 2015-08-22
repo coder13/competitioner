@@ -5,7 +5,10 @@ var Model = require('ampersand-model');
 module.exports = Model.extend({
 	props: {
 		username: 'string',
-		events: 'Object'
+		events: {
+			type: 'array',
+			default: (() => [])
+		}
 	},
 
 	addEvent (event, time) {

@@ -21,7 +21,7 @@ module.exports = React.createClass({
 
 	render: function () {
 		var users = this.getUsers();
-		console.log(users);
+		console.log(24, users);
 		return (
 			<div>
 				{users.map((user) => {
