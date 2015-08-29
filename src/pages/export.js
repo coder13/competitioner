@@ -7,7 +7,7 @@ module.exports = React.createClass({
 	displayName: 'ExportPage',
 
 	renderEvent (eventName, results) {
-		return `#### ${eventName}:\n
+		return `${eventName}:\n
 ${results.map((result, index) => (
 	`${index+1}. /u/${result.name}: ${utils.pretty(result.time)}\n`
 )).join('\n')}`;
