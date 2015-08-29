@@ -38,20 +38,20 @@ ${comp.events.map((event) => (
 	},
 
 	export () {
-		return `${this.renderComp(this.props.competitions.last())}
-Point from last week:\n
-${this.renderPoints(this.props.competitions.allButLast())}\n
-Points from this week:\n
+		var rtrn = `${this.renderComp(this.props.competitions.last())}\n`
+		if (this.props.competitions.length > 1) {
+			rtrn += `Point from last week:\n
+${this.renderPoints(this.props.competitions.allButLast())}\n`;
+		}
+		rtrn += `Points from this week:\n
 ${this.renderPoints([this.props.competitions.last()])}\n
 Formula: 1 + (Total number of people) - (place) = points\n
 Total points:\n
-${this.renderPoints(this.props.competitions)}
-		`;
+${this.renderPoints(this.props.competitions)}`;
+		return rtrn;
 	},
 
 	render () {
-		console.log(8, this.props.competitions)
-
 		return (
 			<Markdown style={{whiteSpace: 'pre-wrap'}}>
 				<h2>Export:</h2>

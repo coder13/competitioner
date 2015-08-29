@@ -33,4 +33,4 @@ module.exports.pretty = function (time) {
 	return out.reverse().join('');
 }
 
-module.exports.timeString = '^(([0-9]+):)?([0-5]?[0-9])(\.([0-9]?[0-9]))?$';
+module.exports.timeString = '^(([0-9]+):)?([0-5]?[0-9])\.([0-9]?[0-9])$';

@@ -65,7 +65,7 @@ module.exports = React.createClass({
 			eventTarget = this.props.events[0];
 		}
 		if (eventTarget && this.state.eventResult &&
-			this.state.eventResult.search('(([0-9]+):)?([0-5]?[0-9])(\.([0-5]?[0-9]))?') === 0) {
+			this.state.eventResult.search(utils.timeString) === 0) {
 			var result = utils.toMilli(this.state.eventResult);
 			
 			this.props.competitor.addEvent(eventTarget, result);

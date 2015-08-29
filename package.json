@@ -6,6 +6,7 @@
   "scripts": {
     "build": "NODE_ENV=production webpack --progress",
     "deploy": "surge -p public -d competioner.surge.sh",
+    "yolo": "npm run build; npm run deploy",
     "start": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -2,7 +2,6 @@ var React = require('react');
 var app = require('ampersand-app');
 var Card = require('react-material-card')
 var Glyphicon = require('react-bootstrap/lib/Glyphicon');
-// var reactFlatUI = require('react-flatui');
 var ampersandMixin = require('ampersand-react-mixin');
 var NavHelper = require('../components/nav-helper.js');
 var Competitors = require('../components/competitor-collection.js')
@@ -15,6 +14,7 @@ module.exports = React.createClass({
 	componentDidMount: function() {
 		this.props.competitions.on('all', function (name, event) {
 			console.log(name, event);
+			this.forceUpdate();
 		}, this);
 	},
 

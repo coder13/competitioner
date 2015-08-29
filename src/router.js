@@ -32,8 +32,12 @@ module.exports = Router.extend({
 
 	competition (id) {
 		var comp = app.me.getComp(id);
-		console.log('competition', id, comp);
-		this.renderPage(<CompetitionPage comp={comp} name={comp.name} events={comp.events} users={comp.users}/>, document.body);
+		if (!comp) {
+			this.redirectTo('');
+		} else {
+			console.log('competition', id, comp);
+			this.renderPage(<CompetitionPage comp={comp} name={comp.name} events={comp.events} users={comp.users}/>, document.body);
+		}
 	},
 
 	export () {

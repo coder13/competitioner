@@ -27,9 +27,7 @@ export default Collection.extend({
 		// TODO: sort array.
 		users = _.sortBy(users, function (competitor) {
 			return competitor.time;
-		})
-
-		console.log(27, users);
+		});
 
 		return users;
 	}
