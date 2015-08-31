@@ -14,9 +14,9 @@ module.exports = Model.extend({
 	},
 
 	initialize () {
-		this.on('all', function (name, event) {
-			console.log(name, event);
-		}, this);
+		// this.on('all', function (name, event) {
+		// 	console.log(name, event);
+		// }, this);
 	},
 
 	remove () {

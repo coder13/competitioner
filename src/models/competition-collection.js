@@ -6,9 +6,9 @@ export default Collection.extend({
 	model: Competition,
 
 	initialize () {
-		this.on('all', function (name, event) {
-			console.log(name, event);
-		}, this);
+		// this.on('all', function (name, event) {
+		// 	console.log(name, event);
+		// }, this);
 	},
 
 	last () {

@@ -28,7 +28,6 @@ module.exports = React.createClass({
 
 	render: function () {
 		var competitors = this.getCompetitors();
-		console.log(36, competitors);
 		return (
 			<div>
 				{competitors.map((user, i) => (

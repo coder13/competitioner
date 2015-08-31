@@ -27,7 +27,6 @@ module.exports = Router.extend({
 
 	index () {
 		this.renderPage(<IndexPage/>, document.body);
-		console.log('index');
 	},
 
 	competition (id) {
@@ -35,13 +34,11 @@ module.exports = Router.extend({
 		if (!comp) {
 			this.redirectTo('');
 		} else {
-			console.log('competition', id, comp);
 			this.renderPage(<CompetitionPage comp={comp} name={comp.name} events={comp.events} users={comp.users}/>, document.body);
 		}
 	},
 
 	export () {
-		console.log('export');
 		this.renderPage(<ExportPage competitions={app.me.competitions}/>, document.body);
 	}
 });

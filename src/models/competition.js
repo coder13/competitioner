@@ -20,10 +20,10 @@ module.exports = Model.extend({
 		if (!this.competitors) {
 			this.competitors = new Competitors();
 		}
-		this.on('all', function (name, event) {
-			console.log(name, event);
-			// this.collection.trigger(name, event);
-		}, this);
+		// this.on('all', function (name, event) {
+		// 	console.log(name, event);
+		// 	// this.collection.trigger(name, event);
+		// }, this);
 	},
 
 	addEvent(event) {

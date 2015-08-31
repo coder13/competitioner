@@ -20,7 +20,6 @@ module.exports = React.createClass({
 	},
 
 	getInitialState () {
-		console.log(this.props.comp);
 		return {
 			eventText: ''
 		};

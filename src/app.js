@@ -18,7 +18,6 @@ var app = window.app = App.extend({
 app.on('newComp', function (event) {
 	event.preventDefault()
 	var comp = app.me.addComp().id;
-	console.log('newComp', comp);
 	app.router.history.navigate('competition/' + comp);
 });
 

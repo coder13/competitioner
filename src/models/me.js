@@ -17,9 +17,7 @@ module.exports = Model.extend({
 		this.load();	// Load competitions
 		this.save();	// Save competitions if it didn't already exist.
 		
-		console.log(this.competitions);
 		this.competitions.on('all', function (name, event) {
-			console.log(name, event);
 			this.save();
 		}, this);
 	},
@@ -32,15 +30,12 @@ module.exports = Model.extend({
 	load () {
 		if (window.localStorage.getItem('competitions')) {
 			var comps = JSON.parse(window.localStorage.getItem('competitions'));
-			console.log(34, comps);
 			this.competitions.set(comps);
-			console.log(36, this.competitions);
 		}
 	},
 
 	addComp () {
 		var id = this.competitions.length;
-		console.log(39, this.competitions.get(id));
 		while (this.competitions.get(id)) {
 			id += 1;
 		}

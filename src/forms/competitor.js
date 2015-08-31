@@ -37,12 +37,11 @@ module.exports = React.createClass({
 	},
 
 	onNameChange (e) {
-		console.log(this.props.competitor.name);
 		this.props.competitor.name = e.target.value;
 	},
 
 	onEventChange (e) {
-		var eventTarget = event.target.value;
+		var eventTarget = e.target.value;
 		if (!eventTarget) {
 			eventTarget = this.props.events[0];
 		}
@@ -50,7 +49,7 @@ module.exports = React.createClass({
 	},
 
 	onEventResultChange(e) {
-		this.setState({eventResult: event.target.value});
+		this.setState({eventResult: e.target.value});
 	},
 
 	onEventPress (e) {
@@ -59,7 +58,7 @@ module.exports = React.createClass({
 		}
 	},
 
-	onAddEvent (event) {
+	onAddEvent () {
 		var eventTarget = this.state.eventChoice;
 		if (!eventTarget) {
 			eventTarget = this.props.events[0];
@@ -77,7 +76,6 @@ module.exports = React.createClass({
 	},
 
 	removeEvent (event) {
-		console.log('removing', event);
 		this.props.competitor.removeEvent(event);
 		this.forceUpdate();
 	},

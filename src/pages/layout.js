@@ -13,7 +13,6 @@ module.exports = React.createClass({
 
 	componentDidMount: function() {
 		this.props.competitions.on('all', function (name, event) {
-			console.log(name, event);
 			this.forceUpdate();
 		}, this);
 	},

@@ -7,7 +7,6 @@ export default Collection.extend({
 	model: Competitor,
 	initialize () {
 		this.on('all', function (name, event) {
-			console.log(name, event);
 			this.parent.trigger(name, event);
 		}, this);
 	},
