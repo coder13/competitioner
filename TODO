@@ -2,3 +2,4 @@
  - - (and other data)
 - Sync list of competitors and their ranking in sidebar
 - - also confirms data is being synced cross app
+- fix bug with deleting competitors- need forceupdate

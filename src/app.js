@@ -8,7 +8,7 @@ if (typeof window !== 'undefined') {
 }
 
 var app = window.app = App.extend({
-	init: function () {
+	init () {
 		this.me = new Me();
 		this.router = new Router();
 		this.router.history.start();

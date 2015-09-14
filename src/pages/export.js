@@ -1,10 +1,16 @@
 var React = require('react');
-var utils = require('../utils.js');
-var Markdown = require('react-remarkable');
 var App = require('ampersand-app');
+var Markdown = require('react-remarkable');
+var utils = require('../utils.js');
 
 module.exports = React.createClass({
 	displayName: 'ExportPage',
+
+	getInitialState () {
+		return {
+			copy: true
+		};
+	},
 
 	renderEvent (eventName, results) {
 		return `${eventName}:\n
@@ -32,8 +38,9 @@ ${comp.events.map((event) => (
 				});
 			});
 		});
+		var i = 0;
 		return `${_.map(competitors, (points, user) => (
-			`/u/${user}: ${points}\n`
+			`${++i}. /u/${user}: ${points}\n`
 		)).join('\n')}`;
 	},
 
@@ -52,11 +59,19 @@ ${this.renderPoints(this.props.competitions)}`;
 	},
 
 	render () {
+		let text = this.export();
 		return (
-			<Markdown style={{whiteSpace: 'pre-wrap'}}>
-				<h2>Export:</h2>
-				{this.export()}
-			</Markdown>
+			<div>
+				<div style={{margin: '0px', width: '100%'}} className='container'>
+					<h2 style={{float: 'left'}}>Export:</h2>
+					<button style={{float: 'right'}} onClick={() => {this.setState({copy: true})}} className='button'>Copy to Clipboard</button>
+				</div>
+				{this.state.copy ? 
+				<textarea onCopy={() => {this.setState({copy: false})}} style={{width: '100%', height: text.split('\n').length*2 + 'em'}}>{text}</textarea>
+				: <div style={{clear: 'both', whiteSpace: 'pre-wrap'}}>
+					{text}
+				</div>}
+			</div>
 		);
 	}
 });
