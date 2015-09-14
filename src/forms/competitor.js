@@ -22,6 +22,7 @@ module.exports = React.createClass({
 	},
 
 	componentDidMount() {
+		this.refs.nameInput.getDOMNode().focus();
 	},
 
 	componentWillReceiveProps () {
@@ -95,7 +96,7 @@ module.exports = React.createClass({
 
 				<div className='form-element'>
 					<label style={{textAlign: 'left'}} htmlFor='Name'>Username:</label>
-					<input name='name' className='form-input' type='text' value={competitor.name} onChange={this.onNameChange}/>
+					<input ref='nameInput' name='name' className='form-input' type='text' value={competitor.name} onChange={this.onNameChange}/>
 				</div>
 
 				<fieldset style={{border: 'none', paddingLeft: '0px'}}>
