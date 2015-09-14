@@ -65,11 +65,13 @@ module.exports = React.createClass({
 		}
 		if (eventTarget && this.state.eventResult &&
 			this.state.eventResult.search(utils.timeString) === 0) {
-			var result = utils.toMilli(this.state.eventResult);
+			let result = utils.toMilli(this.state.eventResult);
 			
 			this.props.competitor.addEvent(eventTarget, result);
 
+			let index = this.props.events.indexOf(eventTarget);
 			this.setState({
+				eventChoice: this.props.events[++index % this.props.events.length] || '',
 				eventResult: ''
 			});
 		}
@@ -110,12 +112,12 @@ module.exports = React.createClass({
 
 					<fieldset style={{border: 'none', paddingLeft: '0px'}}>
 						<select style={{float: 'left', marginRight: '5px', width: '25%'}} className='form-inline' onChange={this.onEventChange}>
-							{events.map((event, i) => (<option key={i}>{event}</option>))}
+							{events.map((event, i) => (event === this.state.eventChoice ? <option selected key={i}>{event}</option> : <option key={i}>{event}</option>))}
 						</select>
 						<input style={{float: 'left', marginRight: '5px', width: '25%'}} type='text' value={eventResult} placeholder='Result'
 	className={'form-input form-inline' + (EventResultValid ? ' input-invalid' : '')} onChange={this.onEventResultChange} onKeyPress={this.onEventPress}/>
 						<button style={{float: 'left', marginRight: '5px', minWidth: '150px', width: '15%'}}
-	className='button form-inline' onClick={this.onAddEvent}>Add event</button>
+	className='button form-inline' onClick={this.onAddEvent}>Add result</button>
 					</fieldset>
 				
 				</fieldset>
