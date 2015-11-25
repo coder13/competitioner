@@ -1,6 +1,6 @@
-var Model = require('ampersand-model');
-var Competitor = require('./competitor.js');
-var Competitors = require('./competitor-collection.js');
+const Model = require('ampersand-model');
+const Competitor = require('./competitor');
+const Competitors = require('./competitor-collection');
 
 // Competition file. Will contain a list of competitiors and th
 module.exports = Model.extend({
@@ -12,18 +12,19 @@ module.exports = Model.extend({
 			default: (() => [])
 		}
 	},
+
 	collections: {
 		competitors: Competitors
 	},
 
 	initialize () {
+		this.reset();
+	},
+
+	reset () {
 		if (!this.competitors) {
 			this.competitors = new Competitors();
 		}
-		// this.on('all', function (name, event) {
-		// 	console.log(name, event);
-		// 	// this.collection.trigger(name, event);
-		// }, this);
 	},
 
 	addEvent(event) {
@@ -41,8 +42,8 @@ module.exports = Model.extend({
 	},
 
 	addCompetitor () {
-		var id = this.competitors.length;
-		var competitor = new Competitor({
+		let id = this.competitors.length;
+		let competitor = new Competitor({
 			_id: id,
 			id: id,
 			username: 'user_' + id

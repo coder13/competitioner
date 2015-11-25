@@ -1,6 +1,6 @@
-var Model = require('ampersand-model');
-var Competition = require('./competition.js');
-var Competitions = require('./competition-collection.js');
+const Model = require('ampersand-model');
+const Competition = require('./competition');
+const Competitions = require('./competition-collection');
 
 module.exports = Model.extend({
 	props: {
@@ -14,12 +14,12 @@ module.exports = Model.extend({
 	initialize () {
 		this.competitions = new Competitions();
 		
-		this.load();	// Load competitions
-		this.save();	// Save competitions if it didn't already exist.
-		
 		this.competitions.on('all', function (name, event) {
 			this.save();
 		}, this);
+		
+		this.load();	// Load competitions
+		this.save();	// Save competitions if it didn't already exist.
 	},
 
 	save () {
@@ -29,23 +29,24 @@ module.exports = Model.extend({
 
 	load () {
 		if (window.localStorage.getItem('competitions')) {
-			var comps = JSON.parse(window.localStorage.getItem('competitions'));
+			let comps = JSON.parse(window.localStorage.getItem('competitions'));
 			this.competitions.set(comps);
 		}
 	},
 
 	addComp () {
-		var id = this.competitions.length;
+		let id = this.competitions.length;
 		while (this.competitions.get(id)) {
 			id += 1;
 		}
-		var comp = new Competition({
+		let comp = new Competition({
 			_id: id,
 			id: id,
 			name: 'Competition ' + id
 		});
 
 		this.competitions.add(comp);
+		this.save();
 		return comp;
 	},
 
@@ -53,7 +54,8 @@ module.exports = Model.extend({
 		return this.competitions.get(id);
 	},
 
-	removeComp (id) {
-		this.competitions.remove({id: id});
+	removeComp (comp) {
+		this.competitions.remove(comp);
+		this.save();
 	}
 });

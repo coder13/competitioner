@@ -1,10 +1,10 @@
-var _ = require('lodash');
-var React = require('react');
-var Card = require('react-material-card');
-var Glyphicon = require('react-bootstrap/lib/Glyphicon');
-var ampersandMixin = require('ampersand-react-mixin');
-var Competitor = require('../models/competitor.js');
-var CompetitorForm = require('../forms/competitor.js');
+const _ = require('lodash');
+const React = require('react');
+const Card = require('react-material-card');
+const Glyphicon = require('react-bootstrap/lib/Glyphicon');
+const ampersandMixin = require('ampersand-react-mixin');
+const Competitor = require('../models/competitor.js');
+const CompetitorForm = require('../forms/competitor');
 
 // Competition page. Wil allow coniguration of the competition.
 module.exports = React.createClass({
@@ -25,10 +25,6 @@ module.exports = React.createClass({
 		};
 	},
 
-	onChange () {
-		// this.props.comp.trigger('change');
-	},
-
 	onNameChange (e) {
 		this.props.comp.name = e.target.value;
 		this.forceUpdate();
@@ -43,23 +39,16 @@ module.exports = React.createClass({
 	},
 
 	onEventPress (e) {
-		if (e.which === 13) {
-			this.addEvent();
+		if (e.which === 13) { // Enter
+			this.onAddEvent();
 		}
 	},
 
 	onAddEvent (e) {
-		this.addEvent();
-	},
-
-	addEvent (event) {
-		var text = event || this.state.eventText;
-		if (text) {
-			this.props.comp.addEvent(text);
-			this.setState({
-				eventText: ''
-			});
-		}
+		this.props.comp.addEvent(this.state.eventText);
+		this.setState({
+			eventText: ''
+		});
 	},
 
 	removeEvent (event) {

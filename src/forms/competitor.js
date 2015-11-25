@@ -1,13 +1,13 @@
-var _ = require('lodash');
-var React = require('react');
-var Card = require('react-material-card');
-var Glyphicon = require('react-bootstrap/lib/Glyphicon');
-var ampersandMixin = require('ampersand-react-mixin');
-var app = require('ampersand-app');
-var utils = require('../utils.js');
+const _ = require('lodash');
+const React = require('react');
+const Card = require('react-material-card');
+const Glyphicon = require('react-bootstrap/lib/Glyphicon');
+const ampersandMixin = require('ampersand-react-mixin');
+const app = require('ampersand-app');
+const utils = require('../utils.js');
 
 //	Competition component. Wil display list of competitors.
-//	TODO:	MAKE EVEN COOLER!!!
+//	TODO:	make cooler
 // - How:   Enter to exit out of editing mode for username
 //          Click on username header to go back to editing username
 module.exports = React.createClass({
@@ -42,7 +42,7 @@ module.exports = React.createClass({
 	},
 
 	onEventChange (e) {
-		var eventTarget = e.target.value;
+		let eventTarget = e.target.value;
 		if (!eventTarget) {
 			eventTarget = this.props.events[0];
 		}
@@ -54,13 +54,13 @@ module.exports = React.createClass({
 	},
 
 	onEventPress (e) {
-		if (e.which === 13) {
+		if (e.which === 13) { // Enter
 			this.onAddEvent();
 		}
 	},
 
 	onAddEvent () {
-		var eventTarget = this.state.eventChoice;
+		let eventTarget = this.state.eventChoice;
 		if (!eventTarget) {
 			eventTarget = this.props.events[0];
 		}
@@ -71,6 +71,7 @@ module.exports = React.createClass({
 			this.props.competitor.addEvent(eventTarget, result);
 
 			let index = this.props.events.indexOf(eventTarget);
+
 			this.setState({
 				eventChoice: this.props.events[++index % this.props.events.length] || '',
 				eventResult: ''
@@ -87,7 +88,7 @@ module.exports = React.createClass({
 		const {competitor, events} = this.props;
 		const {eventResult} = this.state;
 
-		var EventResultValid = eventResult.search(utils.timeString) !== 0;
+		let EventResultValid = eventResult.search(utils.timeString) !== 0;
 
 		return (
 			<Card level={1} style={{padding: '5px', margin: '5px'}}>
@@ -112,8 +113,8 @@ module.exports = React.createClass({
 					</div>
 
 					<fieldset style={{border: 'none', paddingLeft: '0px'}}>
-						<select style={{float: 'left', marginRight: '5px', width: '25%'}} className='form-inline' onChange={this.onEventChange}>
-							{events.map((event, i) => (event === this.state.eventChoice ? <option selected key={i}>{event}</option> : <option key={i}>{event}</option>))}
+						<select value={this.state.eventChoice} style={{float: 'left', marginRight: '5px', width: '25%'}} className='form-inline' onChange={this.onEventChange}>
+							{events.map((event, i) => <option key={i}>{event}</option>)}
 						</select>
 						<input style={{float: 'left', marginRight: '5px', width: '25%'}} type='text' value={eventResult} placeholder='Result'
 	className={'form-input form-inline' + (EventResultValid ? ' input-invalid' : '')} onChange={this.onEventResultChange} onKeyPress={this.onEventPress}/>

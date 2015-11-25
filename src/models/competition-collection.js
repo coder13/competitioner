@@ -1,14 +1,13 @@
-var _ = require('lodash');
-var Collection = require('ampersand-collection');
-var Competition = require('./competition.js');
+const _ = require('lodash');
+const Collection = require('ampersand-collection');
+const Competition = require('./competition');
 
-export default Collection.extend({
+const Competitions = module.exports = Collection.extend({
 	model: Competition,
 
-	initialize () {
-		// this.on('all', function (name, event) {
-		// 	console.log(name, event);
-		// }, this);
+	import (data) {
+		console.log('importing', data);
+		this.reset(data);
 	},
 
 	last () {

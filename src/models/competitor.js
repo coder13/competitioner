@@ -1,5 +1,6 @@
-var _ = require('lodash');
-var Model = require('ampersand-model');
+const _ = require('lodash');
+const app = require('ampersand-app');
+const Model = require('ampersand-model');
 
 // Competitor file. Will contain a username and the user's result per event
 // Each one of these exists per competition per user.
@@ -11,12 +12,6 @@ module.exports = Model.extend({
 			type: 'array',
 			default: (() => [])
 		}
-	},
-
-	initialize () {
-		// this.on('all', function (name, event) {
-		// 	console.log(name, event);
-		// }, this);
 	},
 
 	remove () {
